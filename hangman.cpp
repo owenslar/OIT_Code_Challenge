@@ -47,7 +47,6 @@ void create_set(unordered_set<string> &set, string solution) {
 
 // main function that is called when the executable file is ran
 int main() {
-    cout << "-----Welcome to Owen Larson's Hangman!-----" << endl << endl;
 
     // Grabbing words from words.txt and putting them in a vector
     ifstream input("words.txt");
@@ -63,6 +62,7 @@ int main() {
 
     // the game will run as long as restart is 'y' or 'Y'
     do {
+        cout << "-----Welcome to Owen Larson's Hangman!-----" << endl << endl;
         
         // randomly select a word from list of words
         srand(static_cast<unsigned>(time(nullptr)));
@@ -131,7 +131,7 @@ int main() {
                 }
             }
             if (contains_guess == false) {
-                cout << "The letter " << guess << " is not in the word" << endl;
+                cout << "The letter " << guess << " is not in the word" << endl << endl;
                 incorrect_guesses.push_back(guess);
                 incorrect_guesses.push_back(" ");
                 incorrect_counter += 1;
@@ -152,7 +152,8 @@ int main() {
 
         // check if they want to play again
         cout << "Would you like to play again? (y/n): ";
-        cin >> restart;
+        getline(cin, restart);
+        cout << endl;
 
     } while (restart == "y" || restart =="Y");  // execute everything in main if their choice is "y"
 
