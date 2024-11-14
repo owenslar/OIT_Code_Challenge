@@ -15,6 +15,7 @@ My git commits will demonstrate the progress of my work.
 ## After Coding
 
 I finished working at 6:26pm on Wednesday November 13th
+Total time spent coding: 2 hours and 36 minutes
 
 This GitHub Repository contains:
 - `hangman.cpp` (source code)
