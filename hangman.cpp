@@ -47,7 +47,7 @@ void create_set(unordered_set<string> &set, string solution) {
 
 // main function that is called when the executable file is ran
 int main() {
-    cout << "-----Welcome to Owen Larson's Hangman!-----" << endl << endl << endl;
+    cout << "-----Welcome to Owen Larson's Hangman!-----" << endl << endl;
 
     // Grabbing words from words.txt and putting them in a vector
     ifstream input("words.txt");
@@ -70,7 +70,7 @@ int main() {
 
         cout << "The mystery word has " << solution_word.size() << " letters" << endl << endl;
         
-        // create solution vector, blank vector, incorrect guess vector, and guess vector
+        // create solution vector, blank vector, incorrect guess set, and guess vector
         vector<string> guess_vector;
         vector<string> blank_vector;
         vector<string> solution_vector;
@@ -95,7 +95,7 @@ int main() {
             // check if they have solved the word, exit the loop if so
             if (solution_set.empty()) {
                 cout << "You guessed the word! The word was: " << solution_word << "." << endl;
-                cout << "It took you " << total_guesses << "guesses." << endl;
+                cout << "It took you " << total_guesses << " guesses." << endl;
                 break;
             }
 
@@ -104,8 +104,13 @@ int main() {
             cout << "Guess a letter: ";
             getline(cin, guess);
 
+            // in case the user wants to quit mid-game
+            if (guess == "quit") {
+                break;
+            }
+
             // in case user enters nothing, or 2 or more letters, prompt them again
-            if (guess.size() > 1 || guess.empty()) {
+            else if (guess.size() > 1 || guess.empty()) {
                 cout << "Please enter a singular letter" << endl;
                 continue;
             }
@@ -126,7 +131,7 @@ int main() {
                 }
             }
             if (contains_guess == false) {
-                cout << "The letter: " << guess << " is not in the word" << endl;
+                cout << "The letter " << guess << " is not in the word" << endl;
                 incorrect_guesses.push_back(guess);
                 incorrect_guesses.push_back(" ");
                 incorrect_counter += 1;
@@ -139,7 +144,7 @@ int main() {
             // print out their progress after each guess including thier current progress, the incorrect guess history, and the number of guesses
             print_vector(guess_vector);
             print_vector(blank_vector);
-            cout << endl;
+            cout << "Incorrect Guesses: ";
             print_vector(incorrect_guesses);
             cout << "You have made " << correct_counter + incorrect_counter << " total guesses, " << correct_counter << " correct and " << incorrect_counter << " incorrect."<< endl << endl;
 
@@ -152,7 +157,7 @@ int main() {
     } while (restart == "y" || restart =="Y");  // execute everything in main if their choice is "y"
 
     // in the event they choose to quit, thank them for playing
-    cout << "Thank you for playing Owen Larson's Hangman Game" << endl;
+    cout << endl << "Thank you for playing Owen Larson's Hangman Game!" << endl;
 
     // program finished
     return 0;
