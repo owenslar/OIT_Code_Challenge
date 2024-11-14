@@ -67,8 +67,6 @@ int main() {
         srand(static_cast<unsigned>(time(nullptr)));
         string solution_word = words_vector[rand() % words_vector.size()];
 
-        // cout << solution_word << endl;
-
         cout << "The mystery word has " << solution_word.size() << " letters" << endl;
         
         // create solution vector, blank vector, incorrect guess vector, and guess vector
@@ -91,13 +89,11 @@ int main() {
             int correct_counter = 0;
             int incorrect_counter = 0;
 
-            // check if they have solved the word, end the game if so
+            // check if they have solved the word, exit the loop if so
             if (solution_set.empty()) {
                 cout << "You guessed the word! The word was: " << solution_word << "." << endl;
                 cout << "It took you " << correct_counter + incorrect_counter << "guesses." << endl;
-                cout << "Would you like to play again? (y/n): "
-
-
+                break;
             }
 
 
@@ -132,10 +128,27 @@ int main() {
                 correct_counter += 1;
             }
 
+            // print out their progress after each guess including thier current progress, the incorrect guess history, and the number of guesses
+            print_vector(guess_vector);
+            print_vector(blank_vector);
+            cout << endl;
+            print_vector(incorrect_guesses);
+            cout << "You have made " << correct_counter + incorrect_counter << " total guesses" << endl;
+            cout << correct_counter << " correct guesses" << endl;
+            cout << incorrect_counter << " incorrect guesses" << endl;
+
         }
-    } while (restart == "y" || restart =="Y");
 
+        // check if they want to play again
+        cout << "Would you like to play again? (y/n): ";
+        cin >> restart;
 
+    } while (restart == "y" || restart =="Y");  // execute everything in main if their choice is "y"
+
+    // in the event they choose to quit, thank them for playing
+    cout << "Thank you for playing Owen Larson's Hangman Game" << endl;
+
+    // program finished
     return 0;
 }
 
